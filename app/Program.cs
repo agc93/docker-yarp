@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ConfigurEngine;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -19,10 +20,8 @@ namespace ReverseProxy
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, config) => {
+                    config.AddConfigFile("reverseProxy");
                     config.AddJsonFile("config.json",
-                        optional: true,
-                        reloadOnChange: true);
-                    config.AddJsonFile("reverseProxy.json",
                         optional: true,
                         reloadOnChange: true);
                 })
